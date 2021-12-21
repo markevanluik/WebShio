@@ -1,0 +1,10 @@
+<div *ngIf="categories.length === 0">There are no categories</div>
+<button routerLink="/admin/add-category">Add category</button>
+<div>{{ message }}</div>
+<br />
+<br />
+<div *ngFor="let category of categories">
+  <br />
+  <div>{{ category.categoryName }}</div>
+  <button (click)="onDeleteCategory(category)">Delete</button>
+</div>

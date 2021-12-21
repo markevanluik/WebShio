@@ -1,0 +1,21 @@
+<div>{{ message }}</div>
+<br />
+<form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  <label for="">Email</label>
+  <input
+    ngModel
+    name="email"
+    type="text"
+    required
+    autocomplete="username"
+  /><br />
+  <label for="">Password</label>
+  <input
+    ngModel
+    name="password"
+    type="password"
+    required
+    autocomplete="new-password"
+  /><br />
+  <button [disabled]="form.invalid">Log in</button>
+</form>

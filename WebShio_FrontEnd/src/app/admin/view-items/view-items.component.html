@@ -1,0 +1,11 @@
+<div *ngIf="!items || items.length == 0">There are no items</div>
+<br />
+<div *ngFor="let item of items">
+  <div>{{ item.title }}</div>
+  <div>{{ item.price }}€</div>
+  <div>{{ item.category.categoryName }}</div>
+  <div>Pilt</div>
+  <button (click)="onDeleteItem(item)">Delete</button>
+  <button routerLink="/admin/edit-item/{{ item.id }}">Edit</button>
+  <br />
+</div>

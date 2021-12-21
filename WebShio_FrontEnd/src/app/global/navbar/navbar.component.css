@@ -1,0 +1,19 @@
+.navbar {
+  background-color: blanchedalmond;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.btn {
+  height: 50px;
+  margin: 30px;
+  cursor: pointer;
+}
+
+.sum-cart {
+  text-align: center;
+}

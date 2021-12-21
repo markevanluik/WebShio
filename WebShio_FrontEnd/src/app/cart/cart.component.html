@@ -1,0 +1,15 @@
+<button *ngIf="cartItems.length > 0" (click)="onEmptyCart()">Clear cart</button>
+<div *ngIf="cartItems.length === 0">Cart is empty</div>
+<br />
+<br />
+<div *ngFor="let item of cartItems">
+  <div>{{ item.title }}</div>
+  <div>{{ item.price }}€</div>
+  <div>Category: {{ item.category.categoryName }}</div>
+  <div>Picture</div>
+  <button (click)="onDeleteFromCart(item)">Remove</button>
+  <br />
+</div>
+<br />
+<div *ngIf="cartItems.length > 0">Cart total price: {{ sumOfCart }}</div>
+<button (click)="onPay()">Begin payment</button>

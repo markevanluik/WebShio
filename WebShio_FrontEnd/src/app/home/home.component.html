@@ -1,0 +1,11 @@
+<div *ngIf="!items || items.length == 0">Shop is empty</div>
+<div *ngFor="let item of items">
+  <div routerLink="item/{{ item.id }}">
+    <div>{{ item.title }}</div>
+    <div>{{ item.price }}€</div>
+    <div>Category: {{ item.category.categoryName }}</div>
+    <div>Pilt</div>
+  </div>
+  <button (click)="onAddToCart(item)">Add to cart</button>
+  <br />
+</div>
