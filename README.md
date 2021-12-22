@@ -1,3 +1,9 @@
 # WebShio
-Simple dummy webshop. Techstack: Postgres, Spring, Angular (Work in progress)
-![alt text](https://raw.githubusercontent.com/markevanluik/WebShio/master/WebShio_FrontEnd/src/assets/webshio.png)
+
+Simple dummy webshop. (Work in progress)
+
+## Description
+
+Techstack: Postgres, Spring, Angular.
+
+Features: Login(Spring security), Payment(EveryPayAPI), API documentation(Swagger), Caching(Google Guava), 
