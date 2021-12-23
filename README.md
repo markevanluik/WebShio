@@ -18,7 +18,7 @@ Configure the database by modifiying `src/main/resources/application.properties`
 
 For Angular setup refer to their [repository](https://github.com/angular/angular/blob/master/README.md).
 
-After setup if you are using VS Code you can start the web server with you terminal like so: 
+After setup if you are using VS Code you can start the web server and open the application in the browser with your terminal like so: 
 ```bash
 $ ng s -o
 ```
