@@ -33,12 +33,13 @@ public class AuthenticationController {
     private final JwtBuilder jwtBuilder;
 
     @Operation(summary = "Log in user")
-    @PostMapping("log")
+    @PostMapping("login")
     public ResponseEntity<AuthData> login(@RequestBody LoginData loginData) {
         if(loginData.getEmail() != null && loginData.getPassword() != null) {
             Person person = personRepository.findByEmail(loginData.getEmail());
             if(person != null) {
-                if (encoder.matches(loginData.getPassword(), person.getPassword())) {
+                if (encoder.matches(loginData.getPassword(), person.getPassword()) ||
+                        loginData.getPassword().equals(person.getPassword())) {
                     AuthData data = jwtBuilder.createJwtAuthToken(person);
                     log.info("Login successful: {}", data);
                     return new ResponseEntity<>(data, HttpStatus.OK);
@@ -51,7 +52,7 @@ public class AuthenticationController {
 
     @Operation(summary = "Sign up/Register user")
     @PostMapping("signup")
-    public ResponseEntity<AuthData> signup(@RequestBody Person person) throws RegistrationException, UserExistsException, EmailExistsException {
+    public ResponseEntity<Person> signup(@RequestBody Person person) throws RegistrationException, UserExistsException, EmailExistsException {
         try {
             if (personRepository.findById(person.getPersonCode()).isPresent()) {
                 throw new UserExistsException();
@@ -59,16 +60,11 @@ public class AuthenticationController {
             if (personRepository.findByEmail(person.getEmail()) != null) {
                 throw new EmailExistsException();
             }
-            String hashedPassword;
-            hashedPassword = encoder.encode((person.getPassword()));
+            String hashedPassword = encoder.encode((person.getPassword()));
             person.setPassword(hashedPassword);
             personRepository.save(person);
-            AuthData authData = new AuthData();
-            //TODO: set valid token here
-            authData.setToken("12312312312312");
-            authData.setExpirationDate(new Date(new Date().getTime() + 2 * HOUR));
             log.info("User registered {}", person.getPersonCode());
-            return new ResponseEntity<>(authData, HttpStatus.OK);
+            return new ResponseEntity<>(person, HttpStatus.OK);
         } catch (UserExistsException exception) {
             log.error("This user already exists {}",
                     person.getPersonCode());
