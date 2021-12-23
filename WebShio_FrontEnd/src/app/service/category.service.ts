@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 import { Category } from '../model/category.model';
 
 @Injectable({
@@ -8,10 +9,13 @@ import { Category } from '../model/category.model';
 export class CategoryService {
   private backendUrl = 'http://localhost:8080/categories';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   getCategoriesFromDb() {
-    return this.http.get<Category[]>(this.backendUrl);
+    let headers = this.authService.addTokenToHeader();
+    return this.http.get<Category[]>(this.backendUrl, {
+      headers: headers,
+    });
   }
 
   getOneCategoryFromDb(id: number) {

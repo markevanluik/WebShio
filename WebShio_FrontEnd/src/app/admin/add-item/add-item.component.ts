@@ -24,6 +24,7 @@ export class AddItemComponent implements OnInit {
     this.categoryService.getCategoriesFromDb().subscribe((categories) => {
       this.categories = categories;
       this.categoryNames = categories.map((cat) => cat.categoryName);
+      this.categoryNames.forEach((c) => console.log(c));
     });
   }
 

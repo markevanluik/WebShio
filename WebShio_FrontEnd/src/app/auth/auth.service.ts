@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthData } from '../model/auth.interface';
 import { LoginData } from '../model/login.interface';
+import { Person } from '../model/person.model';
 import { SignUpData } from '../model/signup.interface';
 
 @Injectable({
@@ -17,17 +18,29 @@ export class AuthService {
   }
 
   signup(signUpData: SignUpData) {
-    return this.http.post<AuthData>(this.url + 'signup', signUpData);
+    return this.http.post<Person>(this.url + 'signup', signUpData);
   }
 
-  checkIfLoggedIn() {
+  addTokenToHeader() {
+    let headers = new HttpHeaders();
+    const token = this.getToken();
+    if (token) {
+      headers = headers.set('Authorization', 'Bearer ' + token);
+    }
+    return headers;
+  }
+
+  getToken(): string | null {
     const authData = sessionStorage.getItem('authData');
     if (authData) {
       const parsedAuthData = JSON.parse(authData);
-      if (parsedAuthData && parsedAuthData.expiration > new Date()) {
-        return true;
+      if (
+        parsedAuthData.token &&
+        new Date(parsedAuthData.expiration) > new Date()
+      ) {
+        return parsedAuthData.token;
       }
     }
-    return false;
+    return null;
   }
 }

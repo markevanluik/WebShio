@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/model/user.model';
 import { AuthService } from '../auth.service';
 
@@ -10,7 +11,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   message = '';
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
           })
         );
       }
+      this.router.navigateByUrl('/');
     });
   }
 }
