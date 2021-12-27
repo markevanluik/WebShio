@@ -28,7 +28,9 @@ export class ItemService {
 
   editItemFromDb(item: Item) {
     let headers = this.authService.addTokenToHeader();
-    return this.http.put<{ responseMessage: string }>(this.backendUrl, item);
+    return this.http.put<{ responseMessage: string }>(this.backendUrl, item, {
+      headers: headers,
+    });
   }
 
   deleteItemFromDb(index: number) {

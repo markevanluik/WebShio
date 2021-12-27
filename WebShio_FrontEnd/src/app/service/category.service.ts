@@ -23,9 +23,11 @@ export class CategoryService {
   }
 
   addCategoryToDb(category: Category) {
+    let headers = this.authService.addTokenToHeader();
     return this.http.post<{ responseMessage: string }>(
       this.backendUrl,
-      category
+      category,
+      { headers: headers }
     );
   }
 
