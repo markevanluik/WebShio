@@ -33,9 +33,9 @@ export class CartComponent implements OnInit {
 
   onPay() {
     this.cartService
-      .startPayment(this.sumOfCart)
+      .startPayment(this.cartItems)
       .subscribe((everyPayResponse) => {
-        location.href = everyPayResponse.payment_link;
+        location.href = everyPayResponse.link;
       });
   }
 }
