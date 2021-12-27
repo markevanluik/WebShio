@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AuthData } from '../model/auth.interface';
 import { LoginData } from '../model/login.interface';
 import { Person } from '../model/person.model';
@@ -10,6 +11,7 @@ import { SignUpData } from '../model/signup.interface';
 })
 export class AuthService {
   private url = 'http://localhost:8080/';
+  isLoggedInObs = new BehaviorSubject(false);
 
   constructor(private http: HttpClient) {}
 
@@ -42,5 +44,12 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  validateToken() {
+    let headers = this.addTokenToHeader();
+    return this.http.get<boolean>(this.url + 'validate-token', {
+      headers: headers,
+    });
   }
 }
