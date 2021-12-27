@@ -26,7 +26,8 @@ export class LoginComponent implements OnInit {
           })
         );
       }
-      this.router.navigateByUrl('/');
+      this.authService.isLoggedInObs.next(true);
+      this.router.navigateByUrl('/admin');
     });
   }
 }
