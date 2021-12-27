@@ -1,6 +1,7 @@
 package ee.mark.webshiospring.controller;
 
 import ee.mark.webshiospring.model.Item;
+import ee.mark.webshiospring.model.Order;
 import ee.mark.webshiospring.model.Person;
 import ee.mark.webshiospring.model.output.EveryPayLink;
 import ee.mark.webshiospring.repository.PersonRepository;
@@ -33,6 +34,7 @@ public class OrderController {
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Person person = personRepository.findByEmail(email);
         EveryPayLink everyPayLink = new EveryPayLink();
+        log.info(person);
         if(person != null) {
             String personCode = person.getPersonCode();
             List<Item> databaseItems = orderService.getDatabaseItems(items);
@@ -53,11 +55,11 @@ public class OrderController {
         //Find the order from DB and change status to 'paid'
     }
 
-    //TODO
-   /* @GetMapping("orders")
+    @Operation(summary = "Get persons orders")
+    @GetMapping("orders")
     public List<Order> getOrders() {
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
-        String personCode = personRepository.findByEmail(email).getPersonCode();
-        orderService.get
-    }*/
+        Person person = personRepository.findByEmail(email);
+        return orderService.getPersonOrders(person);
+    }
 }

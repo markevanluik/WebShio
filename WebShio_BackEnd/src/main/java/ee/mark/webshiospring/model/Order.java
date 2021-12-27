@@ -24,6 +24,6 @@ public class Order {
 
     private double amount;
 
-    @OneToMany
+    @ManyToMany
     private List<Item> orderItems;
 }

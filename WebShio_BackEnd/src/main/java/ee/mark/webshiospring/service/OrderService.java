@@ -44,4 +44,8 @@ public class OrderService {
         Order submittedOrder = orderRepository.save(order);
         return submittedOrder.getId();
     }
+
+    public List<Order> getPersonOrders(Person person) {
+       return orderRepository.getOrderByPersonEquals(person);
+    }
 }
