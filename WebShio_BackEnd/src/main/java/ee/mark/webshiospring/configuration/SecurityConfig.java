@@ -22,13 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jwtFilter.setSecretKey(jwtSecretKey);
 
         http
-                .headers().xssProtection().disable().and()
+                .cors().and().headers().xssProtection().disable().and()
                 .csrf().disable()
                 .addFilter(jwtFilter)
                 .authorizeRequests()
                 .antMatchers("/login", "/signup").permitAll()
                 .antMatchers("/swagger-ui.html", "/swagger-ui/**", "/v3/**").permitAll()
-                .antMatchers(HttpMethod.GET , "/items**").permitAll()
+                .antMatchers(HttpMethod.GET , "/items/**").permitAll()
+                .antMatchers(HttpMethod.GET , "/items").permitAll()
                 .anyRequest().authenticated();
     }
 
