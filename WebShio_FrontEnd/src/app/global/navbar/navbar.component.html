@@ -1,8 +1,15 @@
 <div class="navbar">
   <img routerLink="/" src="assets/webshio.png" alt="" class="logo" />
-  <button routerLink="/login">Log in</button>
-  <button routerLink="/register">Register</button>
-  <img routerLink="/admin" src="assets/admin.png" alt="" class="btn" />
+  <button *ngIf="!isLoggedIn" routerLink="/login">Log in</button>
+  <button *ngIf="!isLoggedIn" routerLink="/register">Register</button>
+  <button *ngIf="isLoggedIn" (click)="onLogout()">Log out</button>
+  <img
+    *ngIf="isLoggedIn"
+    routerLink="/admin"
+    src="assets/admin.png"
+    alt=""
+    class="btn"
+  />
   <div>
     <img
       routerLink="/shopping-cart"
