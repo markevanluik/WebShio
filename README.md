@@ -14,8 +14,23 @@ For Spring boot setup refer to their [repository](https://github.com/spring-proj
 
 To run a Spring Boot application on your local machine execute the `main` method in the `ee/mark/webshiospring/WebShioSpringApplication.java ` class from your IDE.
 
-Configure the database by modifiying `src/main/resources/application.properties`
+Add properties file `src/main/resources/application.properties`
 
+```
+spring.jpa.hibernate.ddl-auto=create-drop
+spring.jpa.hibernate.show-sql=true
+spring.datasource.url=jdbc:postgresql://localhost:5432/webshop
+spring.datasource.username=[yourDBUsernameHere]
+spring.datasource.password=[yourDBPasswordHere]
+
+everypay.url=https://igw-demo.every-pay.com/api/v4/payments/oneoff
+everypay.username=[yourEveryPayUsernameHere]
+everypay.accountname=[yourEveryPayAccountNameHere]
+everypay.authorization=[yourBasicAuthTokenHere]
+everypay.customerurl=https://www.example.com
+
+jwt.signingkey=[yourSigningKeyHere]
+```
 For Angular setup refer to their [repository](https://github.com/angular/angular/blob/master/README.md).
 
 After setup if you are using VS Code you can start the web server and open the application in the browser with your terminal like so: 
