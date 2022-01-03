@@ -11,5 +11,4 @@ import java.util.Date;
 public class ErrorResponse {
     private Date timeStamp;
     private String message;
-    private HttpStatus httpStatus;
 }
