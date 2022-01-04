@@ -5,7 +5,6 @@ import ee.mark.webshiospring.model.output.EveryPayData;
 import ee.mark.webshiospring.model.output.EveryPayLink;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Service
