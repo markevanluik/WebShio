@@ -17,9 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
-import static java.util.Calendar.HOUR;
+import javax.validation.Valid;
 
 @RestController
 @Log4j2
@@ -53,7 +51,7 @@ public class AuthenticationController {
 
     @Operation(summary = "Sign up/Register user")
     @PostMapping("signup")
-    public ResponseEntity<Person> signup(@RequestBody Person person) throws RegistrationException, UserExistsException, EmailExistsException {
+    public ResponseEntity<Person> signup(@Valid @RequestBody Person person) throws RegistrationException, UserExistsException, EmailExistsException {
         try {
             if (personRepository.findById(person.getPersonCode()).isPresent()) {
                 throw new UserExistsException();
@@ -75,8 +73,8 @@ public class AuthenticationController {
                     person.getPersonCode());
             throw new EmailExistsException();
         } catch (Exception exception) {
-            log.error("User registration failed {} {}",
-                    person.getPersonCode(), exception.getMessage());
+            log.error("User registration failed {} | {} | {}",
+                    person.getPersonCode(), exception.getMessage(), exception.getClass());
             throw new RegistrationException();
         }
 

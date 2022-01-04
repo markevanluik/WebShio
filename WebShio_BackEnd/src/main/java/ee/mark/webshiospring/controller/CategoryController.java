@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class CategoryController {
 
     @Operation(summary = "Add one category")
     @PostMapping("categories")
-    public ResponseEntity<CategoryResponse> addCategory(@RequestBody Category category) {
+    public ResponseEntity<CategoryResponse> addCategory(@Valid @RequestBody Category category) {
         Category categorySaved = categoryService.addCategory(category);
         return new ResponseEntity<>(new CategoryResponse("Category '" + categorySaved.getCategoryName()
                 + "' with ID-" + categorySaved.getId() + " was added"), HttpStatus.CREATED);
@@ -40,7 +41,7 @@ public class CategoryController {
 
     @Operation(summary = "Edit one Category")
     @PutMapping("categories")
-    public ResponseEntity<CategoryResponse> editCategory(@RequestBody Category category) {
+    public ResponseEntity<CategoryResponse> editCategory(@Valid @RequestBody Category category) {
         Category categoryEdited = categoryService.editCategory(category);
         return new ResponseEntity<>(new CategoryResponse("Category with ID-" + categoryEdited.getId()
                 + " was changed to " + categoryEdited.getCategoryName()), HttpStatus.OK);

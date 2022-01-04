@@ -13,6 +13,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -29,7 +30,7 @@ public class OrderController {
 
     @Operation(summary = "Start the payment")
     @PostMapping("payment")
-    public EveryPayLink startPayment(@RequestBody List<Item> items) {
+    public EveryPayLink startPayment(@Valid @RequestBody List<Item> items) {
         log.info("Starting payment");
         String email = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
         Person person = personRepository.findByEmail(email);

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,7 +33,7 @@ public class ItemController {
 
     @Operation(summary = "Add one item")
     @PostMapping("items")
-    public ResponseEntity<ItemResponse> addItem(@RequestBody Item item) {
+    public ResponseEntity<ItemResponse> addItem(@Valid @RequestBody Item item) {
         Item itemSaved = itemService.addItem(item);
         return new ResponseEntity<>(new ItemResponse("Item '" + itemSaved.getTitle()
                 + "' with ID-" + itemSaved.getId() + " and category '" + itemSaved.getCategory().getCategoryName()
@@ -41,7 +42,7 @@ public class ItemController {
 
     @Operation(summary = "Update one item")
     @PutMapping("items")
-    public ResponseEntity<ItemResponse> editItem(@RequestBody Item item) {
+    public ResponseEntity<ItemResponse> editItem(@Valid @RequestBody Item item) {
         Item itemEdited = itemService.editItem(item);
         return new ResponseEntity<>(new ItemResponse("Item with ID-" + itemEdited.getId()
                 + " has been edited. " + itemEdited.getTitle() +  "-"

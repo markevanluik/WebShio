@@ -1,40 +1,38 @@
 package ee.mark.webshiospring.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
+@Table(name="persons")
 public class Person {
     @Id
     @NotBlank
     private String personCode;
 
     @NotBlank
-    @NotNull
     private String firstName;
 
     @NotBlank
-    @NotNull
     private String lastName;
 
     @NotBlank
-    @NotNull
+    @Email
     @Column(unique = true)
     private String email;
 
     private String phone;
 
     @NotBlank
-    @NotNull
     private String password;
 }
