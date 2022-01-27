@@ -37,4 +37,5 @@ After setup if you are using VS Code you can start the web server and open the a
 ```bash
 $ ng s -o
 ```
-To see API documentation make sure the back end server is running and visit http://localhost:[your-port-here]/swagger-ui.html
+To see API documentation make sure the back end server is running and visit 
+http://localhost:[your-port-here]/swagger-ui.html
